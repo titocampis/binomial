@@ -1,0 +1,162 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{verbatim}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[a4paper]{geometry}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{multirow} % for Tables
+\usepackage{fancyvrb} % for "\Verb" macro
+\VerbatimFootnotes % enable use of \Verb in footnotes
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{green},
+  keywordstyle=\color{blue}
+}
+
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\title{\textbf{Examen de Conducir Teórico}}
+\author{Alejandro Campos}
+\date{Abril, 2024}
+
+\setlength{\parindent}{0ex}
+\setlength{\parskip}{6pt}
+\geometry{top=2.5cm, bottom=3cm,left=3cm, right=3cm}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\newenvironment{blocktemplate}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colframe=Blue,%
+    colbacklower=LimeGreen!75!LightGreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{blocktemplateI}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colframe=Violet,%
+    colbacklower=Black,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{blocktemplateII}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colframe=Green,%
+    colbacklower=LimeGreen!75!LightGreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{blocktemplateIII}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    ,colframe=Red,%
+    colbacklower=LimeGreen!75!LightGreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newtcolorbox{mybasecolorbox}[1][]{%
+  colback=gray!25, colframe=gray!25,
+  coltitle=black,
+  width=(\linewidth-20pt)}
+
+\newenvironment{codetemplate}[1][]{%
+  \mybasecolorbox[#1]
+  \itshape
+}{%
+  \endmybasecolorbox
+}
+
+\begin{document}
+
+%====================================================================================================
+\newpage
+\section{Explicación del Examen}
+
+El examen de conducir teórico consta de 30 preguntas con el mismo formato:
+
+\begin{itemize}
+    \item 3 opciones de respuesta
+    \item Solo 1 correcta
+\end{itemize} 
+\section{Estudio Probabilidades Teoricas}
+
+Cada pregunta es independiente de las demás, pues el contestar correctamente o incorrectamente alguna de ellas no influye en absoluto en la probabilidad de las demás.
+
+El examen se aprueba si se contestan correctamente 27 o más preguntas, son permitidos hasta 3 errores.
+
+\section{Planteamiento del problema}
+
+Suponiendo que realizamos el examen de conducir teórico respondiendo todas las preguntas al azar, ¿cual es la probabilidad de aprobar?
+
+\subsection{Cada pregunta como experimento}
+Si suponemos cada pregunta como un experimento en solitario, vemos que sigue una \href{https://es.wikipedia.org/wiki/Distribuci%C3%B3n_Bernoulli}{distribución de Bernoulli}, contemplando como éxito responder la pregunta correctamente. Así X es una variable aleatoria discreta que mide el "éxito o no éxito" de un experimento con tan solo 2 posibles resultados
+
+$X \sim B(\dfrac{1}{3})$
+
+\begin{itemize}
+    \item éxito: $P(X=1)=p=1/3$
+    \item No éxito: $P(X=0)=p=2/3$
+\end{itemize} 
+
+\subsection{30 preguntas}
+
+Si el éxito o no éxito de una pregunta sigue una distribución de Bernoulli, y además sabemos que son independientes entre sí, el éxito o no éxito de 30 preguntas es la repetición de 30 experimentos de Bernoulli. Entonces, sabemos por definición que la Variable Aleatoria que define el numero de éxitos en 30 experimentos de Bernoulli sigue una \href{https://es.wikipedia.org/wiki/Distribuci%C3%B3n_binomial}{distribución Binomial}.
+
+$X \sim BN(n,p)$,      $P(X=k) = \dbinom{n}{k} \cdot p^k \cdot (1-p)^{n-k}$
+
+Probabilidad acertar "k" preguntas: $P(X=k) = \dbinom{30}{k} \cdot \left(\dfrac{1}{3}\right)^k \cdot \left(1-\dfrac{1}{3}\right)^{30-k}$
+
+\begin{blocktemplate}{NOTE}
+La suma de probabilidades se expresa de la siguiente manera:
+\newline\newline
+$P(A+B) = P(A) + P(B) - P(A\cap B)$
+\newline\newline
+Pero si lo pensamos con detenimiento, en seguida nos daremos cuenta que no existe la intersección entre "A" y "B", pues no puedes tener a la vez tanto exactamente 27 éxitos como exactamente 28 éxitos en 30 ensayos. Puedes tener 27 o puedes tener 28 pero nunca ambos a la vez (intersección).
+\end{blocktemplate}
+
+Así:
+
+Probabilidad acertar "27 o más" preguntas:
+
+$P(X>=27) = P(X=27) + P(X=28) + P(X=29) + P(X=30)$
+
+
+\begin{itemize}
+    \item Probabilidad de acertar exactamente 27: $P(X=27) = \dbinom{30}{27} \cdot \left(\dfrac{1}{3}\right)^{27} \cdot \left(1-\dfrac{1}{3}\right)^{3} \simeq 1,58e-10$
+    \item Probabilidad de acertar exactamente 28: $P(X=28) = \dbinom{30}{27} \cdot \left(\dfrac{1}{3}\right)^{28} \cdot \left(1-\dfrac{1}{3}\right)^{2} \simeq 8.45e-12$
+    \item Probabilidad de acertar exactamente 29: $P(X=29) = \dbinom{30}{27} \cdot \left(\dfrac{1}{3}\right)^{29} \cdot \left(1-\dfrac{1}{3}\right) \simeq 2,91e-13$
+    \item Probabilidad de acertar exactamente 30: $P(X=30) = 1 \cdot \left(\dfrac{1}{3}\right)^{30} \simeq 4,86e-14$
+\end{itemize}
+
+$P(X>=27) = 1.67e-10$
+
+
+\end{document}

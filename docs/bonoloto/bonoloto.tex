@@ -1,0 +1,147 @@
+\documentclass{article}
+\usepackage{graphicx}
+\usepackage{amsmath}
+\PassOptionsToPackage{svgnames}{xcolor}
+\usepackage{tcolorbox}
+\usepackage{xcolor}
+\usepackage{lipsum}
+\usepackage{verbatim}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{shadings,shadows}
+\usepackage{float}
+\usepackage{hyperref}
+\usepackage[a4paper]{geometry}
+\usepackage{listings}
+\usepackage{titlesec}
+\usepackage{amssymb}
+\usepackage[T1]{fontenc}
+\usepackage{multirow} % for Tables
+\usepackage{fancyvrb} % for "\Verb" macro
+\VerbatimFootnotes % enable use of \Verb in footnotes
+\usepackage{listings}
+\lstset{basicstyle=\ttfamily,
+  showstringspaces=false,
+  commentstyle=\color{green},
+  keywordstyle=\color{blue}
+}
+
+\setcounter{secnumdepth}{4}
+\titleformat{\paragraph}
+{\normalfont\normalsize\bfseries}{\theparagraph}{1em}{}
+\titlespacing*{\paragraph}
+{0pt}{3.25ex plus 1ex minus .2ex}{1.5ex plus .2ex}
+
+\title{\textbf{Bonoloto}}
+\author{Alejandro Campos}
+\date{August, 2023}
+
+\setlength{\parindent}{0ex}
+\setlength{\parskip}{6pt}
+\geometry{top=2.5cm, bottom=3cm,left=3cm, right=3cm}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=black,
+    filecolor=magenta,      
+    urlcolor=blue,
+}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\newenvironment{blocktemplate}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colframe=Blue,%
+    colbacklower=LimeGreen!75!LightGreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{blocktemplateI}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colframe=Violet,%
+    colbacklower=Black,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{blocktemplateII}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    colframe=Green,%
+    colbacklower=LimeGreen!75!LightGreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newenvironment{blocktemplateIII}[1]{%
+    \tcolorbox[beamer,%
+    noparskip,breakable,
+    ,colframe=Red,%
+    colbacklower=LimeGreen!75!LightGreen,%
+    title=#1]}%
+    {\endtcolorbox}
+
+\newtcolorbox{mybasecolorbox}[1][]{%
+  colback=gray!25, colframe=gray!25,
+  coltitle=black,
+  width=(\linewidth-20pt)}
+
+\newenvironment{codetemplate}[1][]{%
+  \mybasecolorbox[#1]
+  \itshape
+}{%
+  \endmybasecolorbox
+}
+
+\begin{document}
+\maketitle
+\newpage
+\tableofcontents
+
+%====================================================================================================
+\newpage
+
+\section{Introducción}
+En este documento analizaremos a fondo las probabilidades de l bonoloto, tanto teorica como empiricamente. Además, también analizaremos las variables aleatorias de los premios, ya que no son fijos.
+
+\subsection{Como funciona el bonoloto}
+Lotería típica 6/49.
+
+\subsection{¿Cuanto cuesta el bonoloto?}
+
+\subsection{¿Como funcionan los premios del bonoloto?}
+
+\section{Estudio Probabilidades Teóricas}
+
+Por tanto, podemos calcular facilmente las probabilidades de acertar:
+
+\begin{itemize}
+    \item Acertar \textbf{3} = $\dfrac{\dbinom{6}{3} \cdot \dbinom{43}{3}}{\dbinom{49}{6}} \simeq \dfrac{1}{57} = 0,0177$ 
+    \item Acertar \textbf{4} = $\dfrac{\dbinom{6}{4} \cdot \dbinom{43}{2}}{\dbinom{49}{6}} \simeq \dfrac{1}{1.032} = 9,68e-4$ 
+    \item Acertar \textbf{6} = $\dfrac{1}{\dbinom{49}{6}} \simeq \dfrac{1}{13.983.816} = 7,15-8$
+\end{itemize}
+
+Para los 5 aciertos tenemos 2 categorias, la categoria de acertar 5 fallando el complementario y la categoría de acertar 5 más el complementario. Aplicaremos la siguiente propiedad. Siendo:
+
+\begin{itemize}
+    \item $A:$ "Acertar 5 numeros"
+    \item $B:$ "Acertar el complementario"
+    \item $\overline{B}:$ "Fallar el complementario"
+\end{itemize}
+$P(A \cap B) = P(A) \cdot P(B | A)$ \\\\
+Como son independientes: $P(A \cap B) = P(A) \cdot P(B)$
+\begin{itemize}
+    \item $P(A) = \dfrac{\dbinom{6}{5} \cdot \dbinom{43}{1}}{\dbinom{49}{6}} \simeq \dfrac{1}{54.201
+} = 1,84e-5$ 
+    \item $P(B) = \dfrac{\text{c.fav}}{\text{c.pos}} = \dfrac{1}{43}$
+    \item $P(\overline{B}) = \dfrac{\text{c.fav}}{\text{c.pos}} = 1 - \dfrac{1}{43} = \dfrac{42}{43}$
+\end{itemize}
+
+Acertar \textbf{5 - c}: $\dfrac{\dbinom{6}{5} \cdot \dbinom{43}{1}}{\dbinom{49}{6}} \cdot \dfrac{42}{43} \simeq \dfrac{1}{55.491} = 1,8e-5$ 
+
+Acertar \textbf{5 + c}: $\dfrac{\dbinom{6}{5} \cdot \dbinom{43}{1}}{\dbinom{49}{6}} \cdot \dfrac{1}{43} \simeq \dfrac{1}{2.330.636} = 4,3e-7$ 
+
+
+
+\end{document}
