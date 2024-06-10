@@ -1,4 +1,4 @@
-# Probabilities Study
+# Probability Study
 
 This repository will contain all my probability studies, from easy probability games to complex Bayes and Total Probability theorems. Enjoy!! :sunglasses:
 
