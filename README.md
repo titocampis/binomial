@@ -1,6 +1,8 @@
-# Probability Study
+# Probability Study :game_die: :sparkles:
 
-This repository will contain all my probability studies, from easy probability games to complex Bayes and Total Probability theorems. Enjoy!! :sunglasses:
+Dive into the fascinating world of probability with this comprehensive repository! From the simplicity of fun probability games inside [games/](games/) folder, to the intricacies of Bayes Theorem and the Total Probability Rule inside [apunts_probabilitat/](apunts_probabilitat/). 
+
+Enjoy this mathematical and uncertain probability adventure! :game_die: :sparkles:
 
 ## Project Structure
 
